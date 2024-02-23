@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yu-Gi-Oh!</title>
+    <title>Yu-Gi-Oh! Jokenpô!!!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anta&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="./src/styles/global.css" />
   </head>
   <body>
+    <header class="container-col">
+      <div class="container-row">
+        <h2>Vitórias: <span id="score-win">0</span></h2>
+        <h2>Empates: <span id="score-draw">0</span></h2>
+        <h2>Derrotas: <span id="score-lose">0</span></h2>
+      </div>
+    </header>
+    <main class="container-col">
+      <div class="container-row hand" id="computer-hand"></div>
+      <div class="container-row" id="field">
+        <div class="card-place" id="player-set"></div>
+        <h2>VS</h2>
+        <div class="card-place" id="computer-set"></div>
+      </div>
+      <h2 class="hidde" id="result-game"></h2>
+      <div class="container-row hand" id="player-hand"></div>
+    </main>
     <script src="./src/scripts/main.js" defer></script>
   </body>
 </html>

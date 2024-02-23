@@ -1,5 +1,78 @@
+:root {
+  --card-width: 170px;
+  --card-height: 240px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+}
+
+body header {
+  width: fit-content;
+  width: 100vw;
+  background-color: cornflowerblue;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.container-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+
+  > * {
+    margin: 1rem;
+  }
+}
+
+.container-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+
+  > * {
+    margin: 1rem;
+  }
+}
+
+.card-place {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+}
+
+.hand {
+  min-width: var(--card-width);
+  min-height: var(--card-height);
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 0.3rem;
+}
+
+
+
+#result-game {
+  margin-top: -8rem;
+  padding: 0.3rem 0.5rem;
+  text-transform: uppercase;
+  background-color: goldenrod;
+  border: 1px solid black;
+  border-radius: 0.3rem;
 }
