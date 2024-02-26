@@ -17,6 +17,7 @@ const game = {
       link: "./res/cards/link-frame.png",
       trap: "./res/cards/trap-frame.png",
     },
+    turn: "./res/cards/card-turn.png",
   },
 };
 
@@ -54,6 +55,7 @@ function drawCards() {
   });
 
   game.computer.cards.forEach((card) => {
+    card.classList.add("card-turn");
     game.computer.HandView.appendChild(card);
   });
 }

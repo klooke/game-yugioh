@@ -72,6 +72,17 @@ body header {
   }
 }
 
+.card-turn {
+  position: relative;
+}
+
+.card-turn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../../res/cards/card-turn.png");
+  background-size: cover;
+}
 
 .card-place {
   width: var(--card-width);
@@ -87,6 +98,9 @@ body header {
 }
 
 
+#computer-hand {
+  rotate: z 180deg;
+}
 
 #result-game {
   margin-top: -8rem;
