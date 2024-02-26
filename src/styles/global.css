@@ -53,10 +53,30 @@ body header {
   }
 }
 
-.card-place {
+.card {
   width: var(--card-width);
   height: var(--card-height);
   position: relative;
+  background-size: cover;
+
+  > h4 {
+    position: absolute;
+    top: 0.6rem;
+    left: 1rem;
+    text-transform: capitalize;
+  }
+
+  > img {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+
+.card-place {
+  width: var(--card-width);
+  height: var(--card-height);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .hand {
