@@ -1,6 +1,7 @@
 const game = {
   player: {
     HandView: document.querySelector("#player-hand"),
+    fieldView: document.querySelector("#player-set"),
     cards: [],
   },
   computer: {
@@ -33,6 +34,15 @@ game.computer.cards.push(
   createCard(game.card.frames.trap, "paper")
 );
 
+function onCardClick(event) {
+  if (game.player.fieldView.childElementCount > 0) return;
+
+  var card = event.target.parentNode;
+  card.removeEventListener("click", onCardClick);
+
+  setCard(card, game.player.fieldView);
+}
+
 function createCard(frame, name) {
   var card = document.createElement("div");
   card.style.backgroundImage = `url(${frame})`;
@@ -49,8 +59,13 @@ function createCard(frame, name) {
   return card;
 }
 
+function setCard(card, field) {
+  field.appendChild(card);
+}
+
 function drawCards() {
   game.player.cards.forEach((card) => {
+    card.addEventListener("click", onCardClick);
     game.player.HandView.appendChild(card);
   });
 

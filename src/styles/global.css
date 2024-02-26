@@ -97,6 +97,11 @@ body header {
   margin: 0.3rem;
 }
 
+#player-hand > .card:hover {
+  cursor: pointer;
+  transition: transform 250ms ease;
+  transform: translateY(-1rem);
+}
 
 #computer-hand {
   rotate: z 180deg;
