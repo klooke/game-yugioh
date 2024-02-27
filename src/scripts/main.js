@@ -18,6 +18,9 @@ const game = {
     fieldView: document.querySelector("#computer-set"),
     cards: [],
   },
+  result: {
+    view: document.querySelector("#result-game"),
+  },
   card: {
     data: {
       rock: "./res/cards/data-rock.png",
@@ -121,6 +124,11 @@ function checkResult(playerCard, computerCard) {
   return checkCondition("draw");
 }
 
+function showResult(textContent) {
+  game.result.view.textContent = textContent;
+  game.result.view.classList.remove("hidde");
+}
+
 function checkCondition(condition) {
   var textContent = "";
 
@@ -128,24 +136,43 @@ function checkCondition(condition) {
     case "win":
       game.score.win++;
       game.score.winView.textContent = game.score.win;
+      textContent = "Vitória";
 
       break;
     case "draw":
       game.score.draw++;
       game.score.drawView.textContent = game.score.draw;
+      textContent = "Empate";
 
       break;
     case "lose":
       game.score.lose++;
       game.score.loseView.textContent = game.score.lose;
+      textContent = "Derrota";
 
       break;
     default:
       return;
   }
+
+  showResult(textContent);
+
+  var id = setTimeout(() => {
+    resetGame();
+    clearTimeout(id);
+  }, 2000); //ms
 }
 
 function startGame() {
+  drawCards();
+}
+
+function resetGame() {
+  game.player.fieldView.innerHTML = "";
+  game.computer.fieldView.innerHTML = "";
+
+  game.result.view.classList.add("hidde");
+
   drawCards();
 }
 
