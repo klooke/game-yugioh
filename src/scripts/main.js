@@ -1,4 +1,13 @@
 const game = {
+  score: {
+    winView: document.querySelector("#score-win"),
+    drawView: document.querySelector("#score-draw"),
+    loseView: document.querySelector("#score-lose"),
+
+    win: 0,
+    draw: 0,
+    lose: 0,
+  },
   player: {
     HandView: document.querySelector("#player-hand"),
     fieldView: document.querySelector("#player-set"),
@@ -42,7 +51,10 @@ function onCardClick(event) {
   card.removeEventListener("click", onCardClick);
 
   setCard(card, game.player.fieldView);
-  setRandomCard(game.computer.cards, game.computer.fieldView);
+
+  var randCard = setRandomCard(game.computer.cards, game.computer.fieldView);
+
+  checkResult(card, randCard);
 }
 
 function createCard(frame, name) {
@@ -59,6 +71,14 @@ function createCard(frame, name) {
   card.appendChild(img);
 
   return card;
+}
+
+function getCardResistance(cardName) {
+  var listCard = Object.keys(game.card.data);
+  var cardIndex = listCard.indexOf(cardName);
+  var cardResistenceIndex = (cardIndex + 1) % listCard.length;
+
+  return listCard[cardResistenceIndex];
 }
 
 function setCard(card, field) {
@@ -86,6 +106,43 @@ function drawCards() {
     card.classList.add("card-turn");
     game.computer.HandView.appendChild(card);
   });
+}
+
+function checkResult(playerCard, computerCard) {
+  var playerCardName = playerCard.children[0].textContent || "";
+  var computerCardName = computerCard.children[0].textContent || "";
+
+  if (getCardResistance(playerCardName) === computerCardName)
+    return checkCondition("win");
+
+  if (getCardResistance(computerCardName) === playerCardName)
+    return checkCondition("lose");
+
+  return checkCondition("draw");
+}
+
+function checkCondition(condition) {
+  var textContent = "";
+
+  switch (condition) {
+    case "win":
+      game.score.win++;
+      game.score.winView.textContent = game.score.win;
+
+      break;
+    case "draw":
+      game.score.draw++;
+      game.score.drawView.textContent = game.score.draw;
+
+      break;
+    case "lose":
+      game.score.lose++;
+      game.score.loseView.textContent = game.score.lose;
+
+      break;
+    default:
+      return;
+  }
 }
 
 function startGame() {
