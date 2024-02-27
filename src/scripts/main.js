@@ -1,4 +1,10 @@
 const game = {
+  audios: {
+    set: new Audio("./res/audios/card-set.mp3"),
+    win: new Audio("./res/audios/win.wav"),
+    lose: new Audio("./res/audios/lose.wav"),
+    theme: new Audio("./res/audios/theme.mp3"),
+  },
   score: {
     winView: document.querySelector("#score-win"),
     drawView: document.querySelector("#score-draw"),
@@ -47,6 +53,16 @@ game.computer.cards.push(
   createCard(game.card.frames.trap, "paper")
 );
 
+function playAudio(audio, loop = false, volume = 1.0) {
+  audio?.pause();
+
+  audio.loop = loop;
+  audio.currentTime = 0;
+  audio.volume = volume;
+
+  audio?.play();
+}
+
 function onCardClick(event) {
   if (game.player.fieldView.childElementCount > 0) return;
 
@@ -85,6 +101,8 @@ function getCardResistance(cardName) {
 }
 
 function setCard(card, field) {
+  playAudio(game.audios.set);
+
   field.appendChild(card);
 }
 
@@ -138,6 +156,8 @@ function checkCondition(condition) {
       game.score.winView.textContent = game.score.win;
       textContent = "Vitória";
 
+      playAudio(game.audios.win);
+
       break;
     case "draw":
       game.score.draw++;
@@ -149,6 +169,8 @@ function checkCondition(condition) {
       game.score.lose++;
       game.score.loseView.textContent = game.score.lose;
       textContent = "Derrota";
+
+      playAudio(game.audios.lose);
 
       break;
     default:
@@ -164,6 +186,8 @@ function checkCondition(condition) {
 }
 
 function startGame() {
+  playAudio(game.audios.theme, true, 0.1);
+
   drawCards();
 }
 
