@@ -6,6 +6,7 @@ const game = {
   },
   computer: {
     HandView: document.querySelector("#computer-hand"),
+    fieldView: document.querySelector("#computer-set"),
     cards: [],
   },
   card: {
@@ -41,6 +42,7 @@ function onCardClick(event) {
   card.removeEventListener("click", onCardClick);
 
   setCard(card, game.player.fieldView);
+  setRandomCard(game.computer.cards, game.computer.fieldView);
 }
 
 function createCard(frame, name) {
@@ -61,6 +63,17 @@ function createCard(frame, name) {
 
 function setCard(card, field) {
   field.appendChild(card);
+}
+
+function setRandomCard(listCards, field) {
+  var randID = parseInt(Math.random() * listCards.length);
+
+  var card = listCards[randID];
+  card.classList.remove("card-turn");
+
+  field.appendChild(card);
+
+  return card;
 }
 
 function drawCards() {
